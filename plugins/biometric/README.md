@@ -1,14 +1,16 @@
 ![biometric](https://github.com/tauri-apps/plugins-workspace/raw/v2/plugins/biometric/banner.png)
 
-Prompt the user for biometric authentication on Android and iOS.
+Prompt the user for biometric authentication on Android, iOS and macOS.
 
 | Platform | Supported |
 | -------- | --------- |
 | Linux    | x         |
 | Windows  | x         |
-| macOS    | x         |
+| macOS    | ✓         |
 | Android  | ✓         |
 | iOS      | ✓         |
+
+On macOS, authentication uses Touch ID (built-in or via a Magic Keyboard with Touch ID). The `allowDeviceCredential` option falls back to the user's login password, and the `allowWatch` option additionally accepts approval from a paired Apple Watch.
 
 ## Install
 

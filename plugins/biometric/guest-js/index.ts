@@ -30,14 +30,19 @@ export interface Status {
     | 'biometryLockout'
     | 'biometryNotAvailable'
     | 'biometryNotEnrolled'
+    | 'watchNotAvailable'
 }
 
 export interface AuthOptions {
   allowDeviceCredential?: boolean
   cancelTitle?: string
 
-  // iOS options
+  // iOS and macOS options
   fallbackTitle?: string
+
+  // macOS options
+  /** Allows authenticating by approving on a nearby, paired and unlocked Apple Watch. */
+  allowWatch?: boolean
 
   // android options
   title?: string
@@ -55,7 +60,7 @@ export async function checkStatus(): Promise<Status> {
 }
 
 /**
- * Prompts the user for authentication using the system interface (touchID, faceID or Android Iris).
+ * Prompts the user for authentication using the system interface (touchID, faceID, Android Iris or macOS Touch ID).
  * Rejects if the authentication fails.
  *
  * ```javascript

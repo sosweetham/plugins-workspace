@@ -46,6 +46,8 @@
 
   const userAgent = navigator.userAgent.toLowerCase()
   const isMobile = userAgent.includes('android') || userAgent.includes('iphone')
+  // the desktop user agent is set to `Tauri API - <std::env::consts::OS>`
+  const isMacOS = !isMobile && userAgent.includes('macos')
 
   const views = [
     {
@@ -133,7 +135,7 @@
       component: Nfc,
       icon: 'i-ph-nfc'
     },
-    isMobile && {
+    (isMobile || isMacOS) && {
       label: 'Biometric',
       component: Biometric,
       icon: 'i-ph-scan'
