@@ -5,6 +5,7 @@
   "windows": ["main"],
   "platforms": ["linux", "macOS", "windows"],
   "permissions": [
+    "biometric:default",
     "cli:default",
     "updater:default",
     "global-shortcut:allow-unregister",

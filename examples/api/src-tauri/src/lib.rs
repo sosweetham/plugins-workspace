@@ -41,6 +41,7 @@ pub fn run() {
         .plugin(tauri_plugin_store::Builder::default().build())
         .plugin(tauri_plugin_upload::init())
         .setup(move |app| {
+            app.handle().plugin(tauri_plugin_biometric::init())?;
             #[cfg(desktop)]
             {
                 tray::create_tray(app.handle())?;
@@ -56,7 +57,6 @@ pub fn run() {
             {
                 app.handle().plugin(tauri_plugin_barcode_scanner::init())?;
                 app.handle().plugin(tauri_plugin_nfc::init())?;
-                app.handle().plugin(tauri_plugin_biometric::init())?;
                 app.handle().plugin(tauri_plugin_geolocation::init())?;
                 app.handle().plugin(tauri_plugin_haptics::init())?;
             }

@@ -13,6 +13,12 @@ pub enum Error {
     #[cfg(mobile)]
     #[error(transparent)]
     PluginInvoke(#[from] tauri::plugin::mobile::PluginInvokeError),
+    /// Authentication failed or is unavailable.
+    ///
+    /// `code` matches the error code strings used by the mobile implementations
+    /// (e.g. `userCancel`, `biometryNotAvailable`).
+    #[error("{message}")]
+    Authentication { code: String, message: String },
 }
 
 impl Serialize for Error {
@@ -20,6 +26,17 @@ impl Serialize for Error {
     where
         S: Serializer,
     {
-        serializer.serialize_str(self.to_string().as_ref())
+        match self {
+            // matches the `{ message, code }` rejection shape produced by
+            // the mobile implementations via `invoke.reject(message, code:)`
+            Self::Authentication { code, message } => {
+                use serde::ser::SerializeStruct;
+                let mut s = serializer.serialize_struct("Error", 2)?;
+                s.serialize_field("message", message)?;
+                s.serialize_field("code", code)?;
+                s.end()
+            }
+            _ => serializer.serialize_str(self.to_string().as_ref()),
+        }
     }
 }

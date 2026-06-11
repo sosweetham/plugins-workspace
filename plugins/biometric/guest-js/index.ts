@@ -30,14 +30,28 @@ export interface Status {
     | 'biometryLockout'
     | 'biometryNotAvailable'
     | 'biometryNotEnrolled'
+    | 'watchNotAvailable'
 }
 
 export interface AuthOptions {
   allowDeviceCredential?: boolean
   cancelTitle?: string
 
-  // iOS options
+  // iOS and macOS options
   fallbackTitle?: string
+
+  // macOS options
+  /**
+   * Allows authenticating by approving on a nearby, paired and unlocked Apple Watch.
+   *
+   * Requires the "Apple Watch" option to be enabled in
+   * System Settings > Touch ID & Password ("Use Apple Watch to unlock your applications and your Mac").
+   *
+   * Note that when `allowDeviceCredential` is `true`, macOS always accepts Apple Watch
+   * approval regardless of this option — the system provides no policy that combines
+   * the password fallback with biometrics but excludes the watch.
+   */
+  allowWatch?: boolean
 
   // android options
   title?: string
@@ -55,7 +69,7 @@ export async function checkStatus(): Promise<Status> {
 }
 
 /**
- * Prompts the user for authentication using the system interface (touchID, faceID or Android Iris).
+ * Prompts the user for authentication using the system interface (touchID, faceID, Android Iris or macOS Touch ID).
  * Rejects if the authentication fails.
  *
  * ```javascript
