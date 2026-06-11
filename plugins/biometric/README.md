@@ -10,7 +10,7 @@ Prompt the user for biometric authentication on Android, iOS and macOS.
 | Android  | ✓         |
 | iOS      | ✓         |
 
-On macOS, authentication uses Touch ID (built-in or via a Magic Keyboard with Touch ID). The `allowDeviceCredential` option falls back to the user's login password, and the `allowWatch` option additionally accepts approval from a paired Apple Watch — this requires the "Use Apple Watch to unlock your applications and your Mac" option to be enabled in System Settings > Touch ID & Password.
+On macOS, authentication uses Touch ID (built-in or via a Magic Keyboard with Touch ID). The `allowDeviceCredential` option falls back to the user's login password, and the `allowWatch` option additionally accepts approval from a paired Apple Watch — this requires the "Use Apple Watch to unlock your applications and your Mac" option to be enabled in System Settings > Touch ID & Password. Note that `allowDeviceCredential` always accepts Apple Watch approval as well, regardless of `allowWatch`: macOS provides no policy that combines the password fallback with biometrics but excludes the watch.
 
 ## Install
 

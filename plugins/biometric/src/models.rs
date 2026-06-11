@@ -23,6 +23,10 @@ pub struct AuthOptions {
     ///
     /// Requires the "Apple Watch" option to be enabled in System Settings > Touch ID & Password
     /// ("Use Apple Watch to unlock your applications and your Mac").
+    ///
+    /// Note that when `allow_device_credential` is `true`, macOS always accepts Apple Watch
+    /// approval regardless of this option — the system provides no policy that combines
+    /// the password fallback with biometrics but excludes the watch.
     pub allow_watch: Option<bool>,
 }
 
