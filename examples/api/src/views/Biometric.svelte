@@ -20,7 +20,7 @@
       confirmationRequired: false,
       maxAttemps: 1,
     })
-      .then(onMessage)
+      .then(() => onMessage("Authenticated successfully"))
       .catch(onMessage);
   }
 </script>

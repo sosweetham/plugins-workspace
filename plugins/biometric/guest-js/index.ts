@@ -41,7 +41,12 @@ export interface AuthOptions {
   fallbackTitle?: string
 
   // macOS options
-  /** Allows authenticating by approving on a nearby, paired and unlocked Apple Watch. */
+  /**
+   * Allows authenticating by approving on a nearby, paired and unlocked Apple Watch.
+   *
+   * Requires the "Apple Watch" option to be enabled in
+   * System Settings > Touch ID & Password ("Use Apple Watch to unlock your applications and your Mac").
+   */
   allowWatch?: boolean
 
   // android options

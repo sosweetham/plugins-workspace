@@ -20,6 +20,9 @@ pub struct AuthOptions {
     /// Specifies whether additional user confirmation is required, such as pressing a button after successful biometric authentication. This feature is available Android only.
     pub confirmation_required: Option<bool>,
     /// Allows the user to authenticate by approving on a nearby, paired and unlocked Apple Watch. This feature is available macOS only.
+    ///
+    /// Requires the "Apple Watch" option to be enabled in System Settings > Touch ID & Password
+    /// ("Use Apple Watch to unlock your applications and your Mac").
     pub allow_watch: Option<bool>,
 }
 
